@@ -1,18 +1,27 @@
+import React, {Suspense} from 'react'
 import { Navigate, createBrowserRouter as Router,
   RouterProvider, } from "react-router-dom";
-import Dashboard from "./Pages/Dashboard";
-import Users from "./Pages/Users";
-// import Register from "./Pages/Register";
-import Attendee from "./Pages/Attendee";
-import Guest from "./Pages/Guest";
-import Meeting from "./Pages/Meeting";
-import Login from "./Pages/Login";
-import RequireAuth from "./auth/RequireAuth";
+// import Dashboard from "./Pages/Dashboard";
+// import Users from "./Pages/Users";
+// import Attendee from "./Pages/Attendee";
+// import Guest from "./Pages/Guest";
+// import Meeting from "./Pages/Meeting";
+// import Login from "./Pages/Login";
+// import RequireAuth from "./auth/RequireAuth";
 import "./App.css"
-import RequireNoAuth from "./auth/RequireNoAuth";
-import NotFound from "./Components/NotFound";
+// import RequireNoAuth from "./auth/RequireNoAuth";
+// import NotFound from "./Components/NotFound";
 
 const App = () => {
+  const Login = React.lazy(() => import("./Pages/Login"))
+  const Dashboard = React.lazy(() => import("./Pages/Dashboard"))
+  const Users = React.lazy(() => import("./Pages/Users"))
+  const Attendee = React.lazy(() => import("./Pages/Attendee"))
+  const Guest = React.lazy(() => import("./Pages/Guest"))
+  const Meeting = React.lazy(() => import("./Pages/Meeting"))
+  const RequireAuth = React.lazy(() => import("./auth/RequireAuth"))
+  const RequireNoAuth = React.lazy(() => import("./auth/RequireNoAuth"))
+  const NotFound = React.lazy(() => import("./Components/NotFound"))
 
   const router = Router([
     {
@@ -54,7 +63,12 @@ const App = () => {
   //     </Router>
   // )
 
-  return <RouterProvider router={router} />;
+  return (
+    <Suspense>
+      <RouterProvider router={router} />
+
+    </Suspense>
+  )
 }
 
 export default App

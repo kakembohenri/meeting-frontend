@@ -63,14 +63,20 @@ const Table = ({title, data, isLoading}) => {
                 </>
             </Modal>
             <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center' }} open={attendee} onClose={() => setAttendee(false)}>
-                <Attendee setAttendee={setAttendee} />
+                <>
+                    <Attendee setAttendee={setAttendee} />
+                </>
             </Modal>
 
             <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center' }} open={meeting} onClose={() => setMeeting(false)}>
+                <>
                 <MeetingForm setMeeting={setMeeting} />
+                </>
             </Modal>
             <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center' }} open={guest} onClose={() => setGuest(false)}>
+                <>
                 <GuestForm setGuest={setGuest} />
+                </>
             </Modal>
             {/* Modals */}
             <Box
@@ -122,6 +128,7 @@ const Table = ({title, data, isLoading}) => {
                 <DataGrid 
                 rows={data}
                 columns={columns}
+                getRowId={(row) => data.indexOf(row)}
                 components={{ 
                     Toolbar: CustomToolbar
                  }}

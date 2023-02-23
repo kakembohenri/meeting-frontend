@@ -17,9 +17,9 @@ const getColumns = (title) => {
   const [edit, setEdit] = useState(false)
   const [user, setUser] = useState(null)
   const [meeting, setMeeting] = useState(null)
-  const [current, setCurrent] = useState(null)
+  const [current, setCurrent] = useState(false)
   const [guest, setGuest] = useState(null)
-  const [remove, setRemove] = useState(null)
+  const [remove, setRemove] = useState(false)
   const [add, setAdd] = useState(false)
   const [editGuest, setEditGuest] = useState(false)
   const [delGuest, setDelGuest] = useState(false)
@@ -51,13 +51,19 @@ const getColumns = (title) => {
             <>
             {/* Modals */}
             <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center' }} open={edit} onClose={() => setEdit(false)}>
+              <>
               <EditUser user={user} setEdit={setEdit} />
+              </>
             </Modal>
             <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center' }} open={remove} onClose={() => setRemove(false)}>
+              <>
               <DeleteUser user={user} setRemove={setRemove} />
+              </>
             </Modal>
             <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center' }} open={add} onClose={() => setAdd(false)}>
+              <>
               <AddAttendee user={user} setAdd={setAdd} />
+              </>
             </Modal>
             {/* End Modals */}
 
@@ -107,7 +113,9 @@ const getColumns = (title) => {
           return (
             <>
               <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center' }} open={remove} onClose={() => setRemove(false)}>
+              <>
               <DeleteAttendee user={user} setRemove={setRemove} />
+              </>
             </Modal>
             <Box>
             <Tooltip title="Delete" arrow placement='bottom-end'>
@@ -145,14 +153,14 @@ const getColumns = (title) => {
 
         const handleDownload = async (fileName) => {
           setFile(fileName)
-          // console.log({fileName: fileName})
-          const {data} = await downloadMinutes(fileName)
-          console.log(data)
+          await downloadMinutes(fileName)
         }
         return (
           <>
           <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center' }} open={upload} onClose={() => setUpload(false)}>
+            <>
             <Upload meeting={meeting} setUpload={setUpload} />
+            </>
           </Modal>
           {row.minutes === null ? (
           <Paper elevation={3} sx={{ padding: "0.4rem",
@@ -209,13 +217,19 @@ const getColumns = (title) => {
           return (
             <>
             <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center' }} open={editMeeting} onClose={() => setEditMeeting(false)}>
+              <>
               <EditMeeting meeting={meeting} setEditMeeting={setEditMeeting} />
+              </>
             </Modal>
             <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center' }} open={delMeeting} onClose={() => setDelMeeting(false)}>
+              <>
               <DelMeeting meeting={meeting} setDelMeeting={setDelMeeting} />
+              </>
             </Modal>
             <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center' }} open={current} onClose={() => setCurrent(false)}>
+              <>
               <SetCurrent meeting={meeting} setCurrent={setCurrent} />
+              </>
             </Modal>
 
             <Box sx={{ padding: "0.4rem" }}>
@@ -271,10 +285,14 @@ const getColumns = (title) => {
           return (
             <>
              <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center' }} open={editGuest} onClose={() => setEditGuest(false)}>
+              <>
               <EditGuest guest={guest} setEditGuest={setEditGuest} />
+              </>
             </Modal>
             <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center' }} open={delGuest} onClose={() => setDelGuest(false)}>
+              <>
               <DeleteGuest guest={guest} setDelGuest={setDelGuest} />
+              </>
             </Modal>
               <Box sx={{ padding: "0.4rem" }}>
               <Tooltip title='Edit' arrow placement='bottom-end'>

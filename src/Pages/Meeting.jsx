@@ -8,8 +8,6 @@ const Meeting = () => {
 
   let rows = []
 
-  console.log(data)
-
   if(data !== undefined){
     rows = data
   }
