@@ -1,3 +1,4 @@
+import { CircularProgress } from '@mui/material';
 import React, {Suspense} from 'react'
 import { Navigate, createBrowserRouter as Router,
   RouterProvider, } from "react-router-dom";
@@ -23,26 +24,31 @@ const App = () => {
   const RequireNoAuth = React.lazy(() => import("./auth/RequireNoAuth"))
   const NotFound = React.lazy(() => import("./Components/NotFound"))
 
+  const ProgressBox = () => {
+    return (
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+        <CircularProgress />
+      </div>
+    )
+  }
   const router = Router([
     {
-      path: "/",
       element: <RequireAuth />,
       errorElement: <NotFound />,
       children:[
         {path: "/dashboard", element:<Dashboard /> },
-        {path: "users", element: <Users />},
-        {path: "attendee", element: <Attendee />},
-        {path: "meetings", element: <Meeting />},
-        {path: "guest", element: <Guest />},
+        {path: "/users", element: <Users />},
+        {path: "/attendee", element: <Attendee />},
+        {path: "/meetings", element: <Meeting />},
+        {path: "/guest", element: <Guest />},
       ]
     },
     {
-      path: "/",
       element: <RequireNoAuth />,
       errorElement: <NotFound />,
       children:[
-        {path: "", element:<Navigate to="login" element={<Login />} /> },
-        {path: "login", element: <Login />},
+        {path: "/", element:<Navigate to="login" element={<Login />} /> },
+        {path: "/login", element: <Login />},
         
       ]
     }
@@ -64,7 +70,7 @@ const App = () => {
   // )
 
   return (
-    <Suspense>
+    <Suspense fallback={<ProgressBox />}>
       <RouterProvider router={router} />
 
     </Suspense>
