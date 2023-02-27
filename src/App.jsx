@@ -54,7 +54,7 @@ const App = () => {
     }
 
   ], {
-    basename: "/react"
+    basename: "/meeting/react"
   })
   // return (
   //   <Router>
