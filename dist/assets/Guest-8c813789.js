@@ -1,1 +1,0 @@
-import{j as o}from"./index-8a62f04e.js";import{L as e}from"./meetingApiSlice-14f5a66f.js";import{a as r,T as i}from"./Table-f9c095f4.js";import"./Spinner-2d922e98.js";const p=()=>{const{data:t,isLoading:a}=r();let s=[];return t!==void 0&&(s=t),o.jsx(e,{children:o.jsx(i,{title:"guest",data:s,isLoading:a})})};export{p as default};
