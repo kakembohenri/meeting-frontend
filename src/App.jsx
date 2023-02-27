@@ -53,7 +53,9 @@ const App = () => {
       ]
     }
 
-  ])
+  ], {
+    basename: "/react"
+  })
   // return (
   //   <Router>
   //     <Routes>
