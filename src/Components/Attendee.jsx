@@ -29,6 +29,9 @@ const Attendee = ({setAttendee}) => {
 
             }
             setAttendee(false)
+
+        window.location.reload()
+
           },
     })
   return (

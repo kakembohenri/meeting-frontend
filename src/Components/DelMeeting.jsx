@@ -16,12 +16,14 @@ console.log(meeting)
         alert(data.msg)
 
         setDelMeeting(false)
+        window.location.reload()
+
     }
    
     return( 
     <Paper elevation={5} sx={{ padding: '1rem' }}>
     <Typography variant="h5" sx={{ color: '#3c4858' }}>
-        My Profile
+       Delete Meeting
     </Typography>
     <form onSubmit={handleSubmit}>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>

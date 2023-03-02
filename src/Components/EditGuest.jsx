@@ -12,14 +12,14 @@ const EditGuest = ({guest, setEditGuest}) => {
 
     const formik = useFormik({
         initialValues: {
-            id: id,
+            id: guest.id,
             name: guest.name,
-            email: guest.email,
-            phone: guest.phone,
+            email: guest.email !== null ? guest.email : "",
+            phone: guest.phone !== null ? guest.phone : "",
             invitation_status: guest.invitation_status,
             topic: guest.topic,
             church_from: guest.church_from,
-            created_by: id
+            updated_by: id
         },
         validationSchema: guestSchema,
         onSubmit: async (values) => {
@@ -34,6 +34,8 @@ const EditGuest = ({guest, setEditGuest}) => {
                 alert(JSON.stringify(data.msg, null, 2));
             }
             setEditGuest(false)
+        window.location.reload()
+
           },
     })
   return (
@@ -41,7 +43,7 @@ const EditGuest = ({guest, setEditGuest}) => {
          <Typography variant="h5" sx={{ color: '#3c4858' }}>
             Edit Guest Preacher
         </Typography>
-        <form  onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
         <Box sx={{ display: "flex", alignItems: "center", width: "100%" }}>
             <TextField
                 fullWidth
@@ -95,6 +97,7 @@ const EditGuest = ({guest, setEditGuest}) => {
         <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Invitation Status</InputLabel>
                 <Select
+                    variant="standard"
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     name="invitation_status"
@@ -102,7 +105,6 @@ const EditGuest = ({guest, setEditGuest}) => {
                     label="Invitation Status"
                     onChange={formik.handleChange}
                     error={formik.touched.invitation_status && Boolean(formik.errors.invitation_status)}
-                    helperText={formik.touched.invitation_status && formik.errors.invitation_status}
                 >
                     <MenuItem value={1}>Pending</MenuItem>
                     <MenuItem value={2}>Accepted</MenuItem>

@@ -6,6 +6,7 @@ const SetCurrent = ({meeting, setCurrent}) => {
 
     const [setCurrentMeeting, {isLoading}] = useSetCurrentMeetingMutation();
 
+    console.log(meeting)
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -15,6 +16,7 @@ const SetCurrent = ({meeting, setCurrent}) => {
         alert(data.msg)
 
         setCurrent(false)
+        window.location.reload()
     }
    
     return( 

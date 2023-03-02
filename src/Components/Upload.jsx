@@ -39,7 +39,7 @@ const Upload = ({meeting, setUpload}) => {
     return( 
     <Paper elevation={5} sx={{ padding: '1rem' }}>
     <Typography variant="h5" sx={{ color: '#3c4858' }}>
-        My Profile
+        Upload Minutes
     </Typography>
     <form onSubmit={handleSubmit} >
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>

@@ -18,8 +18,12 @@ const AddAttendee = ({user, setAdd}) => {
         const {data} = await addUserToAttendee(attendee)
 
         alert(data.msg)
+        
+        window.location.reload()
 
         setAdd(false)
+
+
     }
    
     return( 

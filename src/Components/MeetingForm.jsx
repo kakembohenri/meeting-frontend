@@ -25,7 +25,6 @@ const MeetingForm = ({setMeeting}) => {
 
     const {id} = JSON.parse(localStorage.getItem("user"))
 
-    console.log(currentDate)
     const formik = useFormik({
         initialValues: {
             name: "",
@@ -48,6 +47,8 @@ const MeetingForm = ({setMeeting}) => {
                 alert(JSON.stringify(data.msg, null, 2));
             }
             setMeeting(false)
+            window.location.reload()
+
           },
     })
   return (

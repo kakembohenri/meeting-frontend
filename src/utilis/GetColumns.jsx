@@ -50,17 +50,23 @@ const getColumns = (title) => {
           return (
             <>
             {/* Modals */}
-            <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center' }} open={edit} onClose={() => setEdit(false)}>
+            <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center', "& .MuiModal-backdrop": {
+              background: "rgba(0,0,0,0.2)"
+            }  }} open={edit} onClose={() => setEdit(false)}>
               <>
               <EditUser user={user} setEdit={setEdit} />
               </>
             </Modal>
-            <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center' }} open={remove} onClose={() => setRemove(false)}>
+            <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center', "& .MuiModal-backdrop": {
+              background: "rgba(0,0,0,0.2)"
+            }  }} open={remove} onClose={() => setRemove(false)}>
               <>
               <DeleteUser user={user} setRemove={setRemove} />
               </>
             </Modal>
-            <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center' }} open={add} onClose={() => setAdd(false)}>
+            <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center', "& .MuiModal-backdrop": {
+              background: "rgba(0,0,0,0.2)"
+            }  }} open={add} onClose={() => setAdd(false)}>
               <>
               <AddAttendee user={user} setAdd={setAdd} />
               </>
@@ -157,7 +163,9 @@ const getColumns = (title) => {
         }
         return (
           <>
-          <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center' }} open={upload} onClose={() => setUpload(false)}>
+          <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center', "& .MuiModal-backdrop": {
+              background: "rgba(0,0,0,0.2)"
+            }  }} open={upload} onClose={() => setUpload(false)}>
             <>
             <Upload meeting={meeting} setUpload={setUpload} />
             </>
@@ -216,17 +224,23 @@ const getColumns = (title) => {
         renderCell: ({ row }) => {
           return (
             <>
-            <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center' }} open={editMeeting} onClose={() => setEditMeeting(false)}>
+            <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center',"& .MuiModal-backdrop": {
+              background: "rgba(0,0,0,0.2)"
+            }  }} open={editMeeting} onClose={() => setEditMeeting(false)}>
               <>
               <EditMeeting meeting={meeting} setEditMeeting={setEditMeeting} />
               </>
             </Modal>
-            <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center' }} open={delMeeting} onClose={() => setDelMeeting(false)}>
+            <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center', "& .MuiModal-backdrop": {
+              background: "rgba(0,0,0,0.2)"
+            }  }} open={delMeeting} onClose={() => setDelMeeting(false)}>
               <>
               <DelMeeting meeting={meeting} setDelMeeting={setDelMeeting} />
               </>
             </Modal>
-            <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center' }} open={current} onClose={() => setCurrent(false)}>
+            <Modal sx={{ display: "flex", alignItems: 'center', justifyContent: 'center', "& .MuiModal-backdrop": {
+              background: "rgba(0,0,0,0.2)"
+            }  }} open={current} onClose={() => setCurrent(false)}>
               <>
               <SetCurrent meeting={meeting} setCurrent={setCurrent} />
               </>

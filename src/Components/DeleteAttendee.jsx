@@ -17,12 +17,15 @@ const DeleteAttendee = ({user, setRemove}) => {
         alert(data.msg)
 
         setRemove(false)
+
+        window.location.reload()
+
     }
    
     return( 
     <Paper elevation={5} sx={{ padding: '1rem' }}>
     <Typography variant="h5" sx={{ color: '#3c4858' }}>
-        My Profile
+        Delete attendee
     </Typography>
     <form onSubmit={handleSubmit}>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>

@@ -1,1 +1,0 @@
-import{a0 as r,a1 as a,j as t,a2 as s,a3 as o}from"./index-f74e6ca9.js";import i from"./Dashboard-db7c1b9a.js";import"./meetingApiSlice-41f256d7.js";import"./Spinner-f317157e.js";const j=()=>{const e=r(a);return e?e?t.jsx(o,{to:"/dashboard",element:t.jsx(i,{})}):t.jsx(s,{}):t.jsx(s,{})};export{j as default};

@@ -28,7 +28,6 @@ const AddUser = ({setUser}) => {
         validationSchema: addUserSchema,
         onSubmit: async (values) => {
             setLoading(true)
-            console.log(values)
             if(values.pass !== "" || values.passConf !== ""){
                 if(values.pass !== values.passConf){
                     alert("Passwords do not match!")
@@ -37,13 +36,10 @@ const AddUser = ({setUser}) => {
 
                 const {data} = await createAdmin(values);
 
-                console.log(data)
                 if(data.StatusCode === 201){
-                    
                     alert("Created admin")
                 }else{
                     alert(JSON.stringify(data.msg, null, 2));
-    
                 }
 
             }else{
@@ -61,6 +57,7 @@ const AddUser = ({setUser}) => {
             }
             setUser(false)
             setLoading(false)
+            window.location.reload()
           },
     })
   return (

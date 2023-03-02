@@ -10,6 +10,7 @@ const Dashboard = () => {
 
   const {data, isLoading} = useGetCurrentMeetingQuery()
 
+  console.log(data)
   return (
     <Layout>
       <Box>

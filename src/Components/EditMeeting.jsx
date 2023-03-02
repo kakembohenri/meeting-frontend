@@ -34,6 +34,8 @@ const EditMeeting = ({meeting, setEditMeeting}) => {
                 alert(JSON.stringify(data.msg, null, 2));
             }
             setEditMeeting(false)
+            window.location.reload()
+
           },
     })
   return (
@@ -63,6 +65,7 @@ const EditMeeting = ({meeting, setEditMeeting}) => {
         <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Meeting Status</InputLabel>
                 <Select
+                    variant="standard"
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     name="status"

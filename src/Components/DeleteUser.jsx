@@ -4,9 +4,7 @@ import Spinner from "./Spinner"
 
 const DeleteUser = ({user, setRemove}) => {
 
-    // const dispatch = useDispatch()
 
-    console.log(user)
     const [deleteUser, {isLoading}] = useDeleteUserMutation();
 
     const handleSubmit = async (e) => {
@@ -17,6 +15,8 @@ const DeleteUser = ({user, setRemove}) => {
         alert(data.msg)
 
         setRemove(false)
+
+        window.location.reload()
     }
    
     return( 

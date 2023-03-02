@@ -5,18 +5,18 @@ import Spinner from "./Spinner"
 const DeleteGuest = ({guest, setEditGuest}) => {
 
     // const dispatch = useDispatch()
-
-    console.log(guest)
     const [deleteGuest, {isLoading}] = useDeleteGuestMutation();
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const {data} = await deleteGuest(guest)
+        const {data} = await deleteGuest(guest.id)
 
         alert(data.msg)
-
+        
+        window.location.reload()
         setEditGuest(false)
+        
     }
    
     return( 

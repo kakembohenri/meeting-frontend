@@ -2,16 +2,7 @@ import { CircularProgress } from '@mui/material';
 import React, {Suspense} from 'react'
 import { Navigate, createBrowserRouter as Router,
   RouterProvider, } from "react-router-dom";
-// import Dashboard from "./Pages/Dashboard";
-// import Users from "./Pages/Users";
-// import Attendee from "./Pages/Attendee";
-// import Guest from "./Pages/Guest";
-// import Meeting from "./Pages/Meeting";
-// import Login from "./Pages/Login";
-// import RequireAuth from "./auth/RequireAuth";
 import "./App.css"
-// import RequireNoAuth from "./auth/RequireNoAuth";
-// import NotFound from "./Components/NotFound";
 
 const App = () => {
   const Login = React.lazy(() => import("./Pages/Login"))
@@ -53,9 +44,11 @@ const App = () => {
       ]
     }
 
-  ], {
-    basename: "/meeting/react"
-  })
+  ], 
+  // {
+  //   basename: "/meeting/react"
+  // }
+  )
   // return (
   //   <Router>
   //     <Routes>

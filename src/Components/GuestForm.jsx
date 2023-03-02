@@ -32,6 +32,8 @@ const GuestForm = ({setGuest}) => {
                 alert(JSON.stringify(data.msg, null, 2));
             }
             setGuest(false)
+        window.location.reload()
+
           },
     })
   return (

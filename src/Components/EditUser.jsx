@@ -10,7 +10,6 @@ const EditUser = ({user, setEdit}) => {
 
     // const dispatch = useDispatch()
 
-    console.log(user)
     const [updateUser, {isLoading, isSuccess}] = useUpdateUserMutation();
 
     const {id} = JSON.parse(localStorage.getItem("user"))
@@ -36,14 +35,13 @@ const EditUser = ({user, setEdit}) => {
 
             }
             setEdit(false)
-
-            
+            window.location.reload()
         }
     })
     return( 
     <Paper elevation={5} sx={{ padding: '1rem' }}>
     <Typography variant="h5" sx={{ color: '#3c4858' }}>
-        My Profile
+        Edit User
     </Typography>
     <form onSubmit={formik.handleSubmit}>
         <Box sx={{ display: 'flex', margin: '0.6rem 0rem', justifyContent: 'space-between' }}>

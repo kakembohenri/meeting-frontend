@@ -8,7 +8,7 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Button from "@mui/material/Button";
-import { Box, useMediaQuery } from "@mui/material";
+import { Box, CircularProgress, useMediaQuery } from "@mui/material";
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -43,9 +43,10 @@ const SideBar = () => {
   const [open, setOpen] = React.useState(true);
   const [profile, setProfile] = React.useState(false) 
   const [password, handlePassword] = React.useState(false)
-
+  const [signOut, setSignOut] = React.useState(false)
   // Current path
-  const currentPath = window.location.pathname.slice(1)
+  const currentPath = window.location.href.split("/").slice(-1)[0];
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -135,9 +136,11 @@ const AppBar = styled(MuiAppBar, {
     }, [width])
 
     const handleLogout = async() => {
+      setSignOut(true)
       await sendLogOut();
       dispatch(logout())
       navigate("/login")
+      setSignOut(false)
     }
 
 
@@ -183,8 +186,22 @@ const AppBar = styled(MuiAppBar, {
               </Box>
 
                 <Button sx={{color:"#fff", margin: "0 0.4rem"}} onClick={() => handleLogout()}>
-                  <PowerSettingsNew />
-                  Logout
+                  {signOut ? (
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <Typography variant="span">
+                      Logging out
+                      </Typography>
+                      <CircularProgress />
+                    </Box>
+                  ):(
+                    <>
+                      <PowerSettingsNew />
+                    <Typography variant="span">
+                      Logout
+                    </Typography>
+
+                    </>
+                  )}
                 </Button>
 
             </Box>
