@@ -44,25 +44,7 @@ const App = () => {
       ]
     }
 
-  ], 
-  {
-    basename: "/meeting/react"
-  }
-  )
-  // return (
-  //   <Router>
-  //     <Routes>
-  //       <Route path="/" element={ <Navigate to='/login' element={<Login />} />} />
-  //       <Route path="/dashboard" element={<Dashboard />} />
-  //       <Route path="/users" element={<Users />} />
-  //       {/* <Route path="/register" element={<Register />} /> */}
-  //       <Route path="/attendee" element={<Attendee />} />
-  //       <Route path="/meetings" element={<Meeting />} />
-  //       <Route path="/guest" element={<Guest />} />
-  //       <Route path="/login" element={<Login />} />
-  //     </Routes>
-  //     </Router>
-  // )
+  ])
 
   return (
     <Suspense fallback={<ProgressBox />}>
