@@ -1,7 +1,7 @@
 import { CircularProgress } from '@mui/material';
 import React, {Suspense} from 'react'
 import { Navigate, createBrowserRouter as Router,
-  RouterProvider, } from "react-router-dom";
+  RouterProvider, HashRouter} from "react-router-dom";
 import "./App.css"
 
 const App = () => {
@@ -47,10 +47,13 @@ const App = () => {
   ])
 
   return (
-    <Suspense fallback={<ProgressBox />}>
-      <RouterProvider router={router} />
+    <HashRouter>
+      <Suspense fallback={<ProgressBox />}>
+        <RouterProvider router={router} />
 
-    </Suspense>
+      </Suspense>
+
+    </HashRouter>
   )
 }
 
