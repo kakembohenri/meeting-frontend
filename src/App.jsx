@@ -1,7 +1,7 @@
 import { CircularProgress } from '@mui/material';
 import React, {Suspense} from 'react'
 import { Navigate, createBrowserRouter as Router,
-  RouterProvider, HashRouter} from "react-router-dom";
+  RouterProvider, HashRouter, Routes, Route, createHashRouter} from "react-router-dom";
 import "./App.css"
 
 const App = () => {
@@ -22,7 +22,8 @@ const App = () => {
       </div>
     )
   }
-  const router = Router([
+
+  const router = createHashRouter([
     {
       element: <RequireAuth />,
       errorElement: <NotFound />,
@@ -46,14 +47,28 @@ const App = () => {
 
   ])
 
-  return (
-    <HashRouter>
-      <Suspense fallback={<ProgressBox />}>
-        <RouterProvider router={router} />
+  // return (
+  //   <HashRouter>
+  //     <Suspense fallback={<ProgressBox />}>
+  //       <Routes>
+  //         <Route path="/" element={ <Navigate to='/login' element={<Login />} />} />
+  //         <Route path="/dashboard" element={<Dashboard />} />
+  //         <Route path="/users" element={<Users />} />
+  //         {/* <Route path="/register" element={<Register />} /> */}
+  //         <Route path="/attendee" element={<Attendee />} />
+  //         <Route path="/meetings" element={<Meeting />} />
+  //         <Route path="/guest" element={<Guest />} />
+  //         <Route path="/login" element={<Login />} />
+  //       </Routes>
+  //     </Suspense>
+  //     </HashRouter>
+  // )
 
+  return (
+    <Suspense fallback={<ProgressBox />}>
+        <RouterProvider router={router} />
       </Suspense>
 
-    </HashRouter>
   )
 }
 
