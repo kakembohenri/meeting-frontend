@@ -45,9 +45,9 @@ const App = () => {
     }
 
   ], 
-  // {
-  //   basename: "/meeting/react"
-  // }
+  {
+    basename: "/meeting/react"
+  }
   )
   // return (
   //   <Router>
