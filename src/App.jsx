@@ -1,7 +1,8 @@
 import { CircularProgress } from '@mui/material';
 import React, {Suspense} from 'react'
 import { Navigate, createBrowserRouter as Router,
-  RouterProvider, } from "react-router-dom";
+  RouterProvider,
+  createHashRouter, } from "react-router-dom";
 import "./App.css"
 
 const App = () => {
@@ -22,7 +23,7 @@ const App = () => {
       </div>
     )
   }
-  const router = Router([
+  const router = createHashRouter([
     {
       element: <RequireAuth />,
       errorElement: <NotFound />,
@@ -44,10 +45,11 @@ const App = () => {
       ]
     }
 
-  ], 
-  {
-    basename: "/meeting/react"
-  }
+  ],
+
+  // {
+  //   basename: "/meeting/react"
+  // }
   )
   // return (
   //   <Router>

@@ -7,7 +7,7 @@ const RequireAuth = () => {
   const isLoggedIn = useSelector(selectToken);
 
   if (!isLoggedIn) {
-    return window.location.assign(`/login?redirect=${location.pathname}`);
+    return window.location.assign(`#/login?redirect=${location.pathname}`);
   }
 
   return <Outlet />;
