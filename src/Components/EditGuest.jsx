@@ -19,7 +19,8 @@ const EditGuest = ({guest, setEditGuest}) => {
             invitation_status: guest.invitation_status,
             topic: guest.topic,
             church_from: guest.church_from,
-            updated_by: id
+            updated_by: id,
+            created_by:guest.created_by
         },
         validationSchema: guestSchema,
         onSubmit: async (values) => {
@@ -38,6 +39,8 @@ const EditGuest = ({guest, setEditGuest}) => {
 
           },
     })
+
+    console.log("errors:", formik.errors)
   return (
     <Paper elevation={5} sx={{ padding: '1rem', width: '30%' }}>
          <Typography variant="h5" sx={{ color: '#3c4858' }}>
