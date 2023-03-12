@@ -1,10 +1,22 @@
-import { Paper, TextField, Button, Box, Typography } from "@mui/material"
+import { Paper, TextField, Button, Box, Typography, Autocomplete } from "@mui/material"
 import { useFormik } from "formik"
 import { addMeetingSchema } from "../utilis/validation"
 import { useCreateMeetingMutation } from "../services/meetingApiSlice"
 import Spinner from "./Spinner"
+import { useState } from "react"
+import { useGetGuestsQuery } from "../services/guestApiSlice"
+import { useEffect } from "react"
+import { useMemo } from "react"
 
 const MeetingForm = ({setMeeting}) => {
+
+    const [guests, setGuests] = useState([
+        {
+            id: "",
+            label: "",
+        }
+
+    ])
 
     function formatDate() {
         var d = new Date(),
@@ -23,6 +35,26 @@ const MeetingForm = ({setMeeting}) => {
 
     const [createMeeting, {isLoading}] = useCreateMeetingMutation()
 
+    const {data} = useGetGuestsQuery()
+
+    useMemo(() => {
+        if(data !== undefined){
+            data.map(item => {
+                let newArray = guests.filter(guest => guest.id === item.id)
+                if(newArray.length === 0){
+                    setGuests((prev) => 
+                    [...prev, {
+                        id: item.id,
+                        label: item.name,
+                    }
+                ]);
+
+                }
+
+            })
+        }
+    }, [data])
+
     const {id} = JSON.parse(localStorage.getItem("user"))
 
     const formik = useFormik({
@@ -32,11 +64,13 @@ const MeetingForm = ({setMeeting}) => {
             start_time: "",
             end_time: "",
             location: "",
+            guest: guests[0],
             created_by: id
         },
         validationSchema: addMeetingSchema,
         onSubmit: async (values) => {
             
+            console.log("values:", values)
             const {data} = await createMeeting(values)
 
             console.log(data)
@@ -47,7 +81,7 @@ const MeetingForm = ({setMeeting}) => {
                 alert(JSON.stringify(data.msg, null, 2));
             }
             setMeeting(false)
-            window.location.reload()
+            // window.location.reload()
 
           },
     })
@@ -67,7 +101,7 @@ const MeetingForm = ({setMeeting}) => {
                 variant="filled"
                 id="name"
                 name="name"
-                label="Name"
+                label="Meeting Title"
                 value={formik.values.name}
                 onChange={formik.handleChange}
                 error={formik.touched.name && Boolean(formik.errors.name)}
@@ -139,6 +173,21 @@ const MeetingForm = ({setMeeting}) => {
                 onChange={formik.handleChange}
                 error={formik.touched.location && Boolean(formik.errors.location)}
                 helperText={formik.touched.location && formik.errors.location}
+                />
+        </Box>
+        <Box sx={{ display: "flex", alignItems: "center", width: "100%" }}>
+            <Autocomplete
+                fullWidth
+                disablePortal
+                name="guest"
+                options={guests}
+                value={formik.values.guest}
+                onChange={(e, newValue) => {
+                    formik.values.guest = newValue
+                }}
+                error={formik.touched.guest && Boolean(formik.errors.guest)}
+                helperText={formik.touched.guest && formik.errors.guest}
+                renderInput={(params) => <TextField  {...params} label="Select guest" variant="standard"  />}
                 />
         </Box>
         <Box sx={{ margin: '1rem 0', display: 'flex', justifyContent: 'center'  }}>

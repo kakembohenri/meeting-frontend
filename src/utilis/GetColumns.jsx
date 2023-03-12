@@ -158,8 +158,14 @@ const getColumns = (title) => {
       {field: "minutes", headerName: "Minutes", flex: 0.2,renderCell: ({row}) => {
 
         const handleDownload = async (fileName) => {
+          console.log(fileName)
           setFile(fileName)
-          await downloadMinutes(fileName)
+          const {data} = await downloadMinutes(fileName);
+
+            const downloadLink = document.createElement("a");
+            downloadLink.href = data.doc;
+            downloadLink.download = data.fileName;
+            downloadLink.click();
         }
         return (
           <>

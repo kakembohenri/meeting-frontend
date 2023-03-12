@@ -1,8 +1,8 @@
 import { CircularProgress } from '@mui/material';
 import React, {Suspense} from 'react'
-import { Navigate, createBrowserRouter as Router,
-  RouterProvider, HashRouter, Routes, Route, createHashRouter} from "react-router-dom";
+import { Navigate, RouterProvider, createHashRouter} from "react-router-dom";
 import "./App.css"
+import Layout from './Components/Layout';
 
 const App = () => {
   const Login = React.lazy(() => import("./Pages/Login"))
@@ -17,9 +17,9 @@ const App = () => {
 
   const ProgressBox = () => {
     return (
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-        <CircularProgress />
-      </div>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+          <CircularProgress />
+        </div>
     )
   }
 

@@ -1,13 +1,20 @@
-import { useState } from "react";
-import { Box, Paper, Typography, Button, Modal } from "@mui/material";
+import { useState, lazy } from "react";
+import { Box, Paper, Button, Modal } from "@mui/material";
 import { DataGrid, GridToolbarContainer, GridToolbarQuickFilter } from "@mui/x-data-grid";
-import { Download, Add, Calculate } from "@mui/icons-material";
+import { Add } from "@mui/icons-material";
 import getColumns from "../utilis/GetColumns";
-import AddUser from "./AddUser";
-import Attendee from "./Attendee";
-import MeetingForm from "./MeetingForm";
-import GuestForm from "./GuestForm";
-import Spinner from "./Spinner";
+// import AddUser from "./AddUser";
+// import Attendee from "./Attendee";
+// import MeetingForm from "./MeetingForm";
+// import GuestForm from "./GuestForm";
+// import Spinner from "./Spinner";
+
+// const getColumns = lazy(() => import("../utilis/GetColumns"))
+const AddUser = lazy(() => import("./AddUser"))
+const Attendee = lazy(() => import("./Attendee"))
+const MeetingForm = lazy(() => import("./MeetingForm"))
+const GuestForm = lazy(() => import("./GuestForm"))
+const Spinner = lazy(() => import("./Spinner"))
 
 const Table = ({title, data, isLoading}) => {
 

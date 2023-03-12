@@ -1,14 +1,43 @@
-import { Paper, TextField, Button, Box, Typography } from "@mui/material"
+import { Paper, TextField, Button, Box, Typography, Autocomplete } from "@mui/material"
 import { useFormik } from "formik"
 import { guestSchema } from "../utilis/validation"
 import { useCreateGuestsMutation } from "../services/guestApiSlice"
 import Spinner from "./Spinner"
+import { useMemo, useState } from "react"
+import { useGetMeetingsQuery } from "../services/meetingApiSlice"
 
 const GuestForm = ({setGuest}) => {
 
     const {id} = JSON.parse(localStorage.getItem('user'))
 
     const [createGuests, {isLoading}] = useCreateGuestsMutation()
+
+    const {data} = useGetMeetingsQuery()
+
+    const [meetings, setMeeting] = useState([
+        {
+            id: "",
+            label: "",
+        }
+    ])
+
+    useMemo(() => {
+        if(data !== undefined){
+            data.map(item => {
+                let newArray = meetings.filter(meeting => meeting.id === item.id)
+                if(newArray.length === 0){
+                    setMeeting((prev) => 
+                    [...prev, {
+                        id: item.id,
+                        label: item.name,
+                    }
+                ]);
+
+                }
+
+            })
+        }
+    }, [data])
 
     const formik = useFormik({
         initialValues: {
@@ -17,6 +46,7 @@ const GuestForm = ({setGuest}) => {
             phone: "",
             topic: "",
             church_from: "",
+            meeting: meetings[0],
             created_by: id
         },
         validationSchema: guestSchema,
@@ -51,7 +81,7 @@ const GuestForm = ({setGuest}) => {
                 variant="filled"
                 id="name"
                 name="name"
-                label="Name"
+                label="Full Name"
                 value={formik.values.name}
                 onChange={formik.handleChange}
                 error={formik.touched.name && Boolean(formik.errors.name)}
@@ -95,7 +125,7 @@ const GuestForm = ({setGuest}) => {
             <TextField
                 fullWidth
                 multiline
-                rows={3}
+                rows={2}
                 sx={{ ".MuiInputBase-root ": {
                     background: "white"
                 }, margin: '0.5rem 0' }}
@@ -123,6 +153,21 @@ const GuestForm = ({setGuest}) => {
                 onChange={formik.handleChange}
                 error={formik.touched.church_from && Boolean(formik.errors.church_from)}
                 helperText={formik.touched.church_from && formik.errors.church_from}
+                />
+        </Box>
+        <Box sx={{ display: "flex", alignItems: "center", width: "100%" }}>
+        <Autocomplete
+                fullWidth
+                disablePortal
+                name="meeting"
+                options={meetings}
+                value={formik.values.meeting}
+                onChange={(e, newValue) => {
+                    formik.values.meeting = newValue
+                }}
+                error={formik.touched.meeting && Boolean(formik.errors.meeting)}
+                helperText={formik.touched.meeting && formik.errors.meeting}
+                renderInput={(params) => <TextField  {...params} label="Select Meeting" variant="standard"  />}
                 />
         </Box>
         <Box sx={{ margin: '1rem 0', display: 'flex', justifyContent: 'center'  }}>

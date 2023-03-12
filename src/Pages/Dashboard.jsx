@@ -1,18 +1,33 @@
 import Layout from "../Components/Layout"
-import { Grid, Paper, Typography, Box } from "@mui/material"
+import { Grid, Paper, Typography, Box, Button, CircularProgress, Modal } from "@mui/material"
 import { People, CalendarToday, HourglassTop, HourglassFull, CheckCircle, DoNotDisturb, MoreHoriz } from "@mui/icons-material"
-import { useGetCurrentMeetingQuery } from "../services/meetingApiSlice"
+import { useGetCurrentMeetingQuery, useGetMeetingsQuery } from "../services/meetingApiSlice"
 import { useDispatch } from "react-redux"
 import Spinner from "../Components/Spinner"
 import Alert from "@mui/material/Alert"
+import { useState } from "react"
+import ViewMeeting from "../Components/ViewMeeting"
 
 const Dashboard = () => {
 
   const {data, isLoading} = useGetCurrentMeetingQuery()
 
-  console.log(data)
+  const meetings = useGetMeetingsQuery()
+
+  const [view, setView] = useState(false)
+
+  const [meeting, setMeeting] = useState(null)
   return (
     <Layout>
+      <Modal open={view} onClose={() => setView(false)}>
+        <Box sx={{ display: "flex",
+    height: "100vh",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center" }}>
+          <ViewMeeting setView={setView} meeting={meeting} />
+        </Box>
+      </Modal>
       <Box>
         <Typography variant="h5" sx={{ margin: '0.8rem 0rem' }}>Current meeting</Typography>
       </Box>
@@ -166,6 +181,33 @@ const Dashboard = () => {
 
         )
       )}
+      <Box sx={{ marginTop: "2rem" }}>
+        <Typography variant="h5">Meetings: {meetings?.data?.length}</Typography>
+        <Paper elevation={3} sx={{ padding: "0.7rem", width: "fit-content", maxHeight: "18rem", overflowY: "auto"  }}>
+            {meetings?.data === undefined ? (
+              <CircularProgress />
+            ):(
+              meetings?.data.length === 0 ? (
+                <Typography>
+                  No meetings created
+                </Typography>
+              ):(
+                meetings.data.map((item, index) => (
+                  <Box key={index} sx={{ margin: "0.4rem 0rem" }}>
+                    <Button variant="contained" sx={{ color: "black", background: "transparent", ":hover":{
+                      background: "transparent"
+                    }, textTransform: "capitalize" }} onClick={() => {
+                      setMeeting(item)
+                      setView(true)
+                    }}>
+                      {item.name}
+                    </Button>
+                  </Box>
+                ))
+              )
+            )}
+        </Paper>
+      </Box>
     </Layout>
   )
 }

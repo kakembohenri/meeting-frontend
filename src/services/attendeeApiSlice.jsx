@@ -6,6 +6,12 @@ const attendeeApiSlice = apiSlice.injectEndpoints({
             query: () => '/attendees',
             
         }),
+        getAttendeesByMeetingId: builder.mutation({
+            query: (id) => ({
+                url: `/meeting-attendees/${id}`,
+                method: 'GET'
+            })
+        }),
         createAttendee: builder.mutation({
             query: (body) => ({
             url: '/attendees',
@@ -30,4 +36,10 @@ const attendeeApiSlice = apiSlice.injectEndpoints({
     })
 })
 
-export const {useGetAttendeeQuery, useCreateAttendeeMutation, useDeleteAttendeeMutation, useAddUserToAttendeeMutation} = attendeeApiSlice
+export const 
+{useGetAttendeeQuery,
+useGetAttendeesByMeetingIdMutation,
+useCreateAttendeeMutation,
+useDeleteAttendeeMutation,
+useAddUserToAttendeeMutation
+} = attendeeApiSlice

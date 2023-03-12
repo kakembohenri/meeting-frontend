@@ -75,7 +75,7 @@ const AddUser = ({setUser}) => {
                 variant="filled"
                 id="name"
                 name="name"
-                label="Name"
+                label="Enter Full Name"
                 value={formik.values.name}
                 onChange={formik.handleChange}
                 error={formik.touched.name && Boolean(formik.errors.name)}
