@@ -4,8 +4,8 @@ import { selectToken } from "./authSlice";
 const apiSlice = createApi({
     reducerPath: "apiSlice",
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://127.0.0.1:8000/api",
-        // baseUrl: "https://elivecafe.com/meeting/meeting_api/api",
+        // baseUrl: "http://127.0.0.1:8000/api",
+        baseUrl: "https://elivecafe.com/meeting/meeting_api/api",
         prepareHeaders: (headers, { getState }) => {
             const token = selectToken(getState());
             if (token) {
